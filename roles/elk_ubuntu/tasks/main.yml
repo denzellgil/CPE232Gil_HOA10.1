@@ -1,0 +1,22 @@
+---
+
+- name: Installation of Elasticsearch for Ubuntu
+  apt:
+    name: elasticsearch
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Installation of Logstash for Ubuntu
+  apt:
+    name: logstash
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Installation of Kibana for Ubuntu
+  apt:
+    name: kibana
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"

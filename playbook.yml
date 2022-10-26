@@ -1,0 +1,43 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Update Repository Index for Ubuntu
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Update Repository Index for CentOS
+    tags: always
+    yum:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Install Pre Requisites
+      include_role:
+        name: pre_tasks
+
+- hosts: ubuntu
+  become: true
+  tasks:
+    - name: Install ELK Stack on Ubuntu Server
+      include_role:
+        name: elk_ubuntu
+      when: ansible_distribution == "Ubuntu"
+
+
+- hosts: centos
+  become: true
+  tasks:
+    - name: Install ELK Stack for CentOS
+      include_role:
+        name: elk_centos
+      when: ansible_distribution == "CentOS"

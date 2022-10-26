@@ -1,0 +1,22 @@
+---
+
+- name: Installation of Elasticsearch for CentOS
+  yum:
+    name: elasticsearch-oss
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Installation of Logstash for CentOS
+  yum:
+    name: logstash
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Installation of Kibana for CentOS
+  yum:
+    name: kibana-oss
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
